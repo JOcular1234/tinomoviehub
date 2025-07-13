@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// Use environment variable for API URL, fallback to localhost for development
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Use environment variable for API URL, fallback to production URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://tinomoviehub.onrender.com/api';
+
+// Debug: Log the API URL being used
+console.log('API Base URL:', API_BASE_URL);
+console.log('Environment variable:', import.meta.env.VITE_API_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
