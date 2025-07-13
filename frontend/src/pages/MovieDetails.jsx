@@ -1,7 +1,7 @@
 // src/pages/MovieDetails.jsx
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 
 function MovieDetails() {
   const { id } = useParams();
@@ -14,7 +14,7 @@ function MovieDetails() {
     const fetchMovie = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:5000/api/movies/${id}`);
+        const res = await api.get(`/movies/${id}`);
         setMovie(res.data);
         setError('');
       } catch (err) {
@@ -33,8 +33,8 @@ function MovieDetails() {
       return;
     }
     try {
-      await axios.post(
-        'http://localhost:5000/api/user/reviews',
+      await api.post(
+        '/user/reviews',
         { movieId: id, ...review },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );

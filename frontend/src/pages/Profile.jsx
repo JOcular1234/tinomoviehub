@@ -1,6 +1,6 @@
 // src/pages/Profile.jsx
 import { useState, useEffect, useContext, useMemo } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { toast } from 'react-toastify';
 import { WatchlistContext } from '../context/WatchlistContext';
 import { MovieContext } from '../context/MovieContext'; // New context for caching
@@ -52,10 +52,10 @@ function Profile() {
 
         // Fetch user profile and favorites concurrently
         const [userRes, favRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/user/profile', {
+          api.get('/user/profile', {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get('http://localhost:5000/api/user/favorites', {
+          api.get('/user/favorites', {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -101,8 +101,8 @@ function Profile() {
         toast.error('Please log in to update profile');
         return;
       }
-      const res = await axios.put(
-        'http://localhost:5000/api/user/profile',
+      const res = await api.put(
+        '/user/profile',
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 export const MovieContext = createContext();
 
@@ -11,7 +11,7 @@ export const MovieProvider = ({ children }) => {
       return movieCache[id];
     }
     try {
-      const res = await axios.get(`http://localhost:5000/api/movies/${id}`);
+      const res = await api.get(`/movies/${id}`);
       setMovieCache((prev) => ({ ...prev, [id]: res.data }));
       return res.data;
     } catch (err) {

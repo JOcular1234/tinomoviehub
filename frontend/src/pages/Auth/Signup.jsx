@@ -1,7 +1,7 @@
 // src/pages/Auth/Signup.jsx
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../api';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ function Signup() {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const res = await api.post('/auth/register', formData);
       localStorage.setItem('token', res.data.token);
       navigate('/');
     } catch (err) {

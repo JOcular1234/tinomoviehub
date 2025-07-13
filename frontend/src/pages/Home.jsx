@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import MovieCard from '../components/MovieCard';
 
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
   const searchMovies = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/movies/search?query=${query}`);
+      const res = await api.get(`/movies/search?query=${query}`);
       setMovies(res.data.results || []);
       setError('');
     } catch (err) {
@@ -26,7 +26,7 @@ function Home() {
   const filterMovies = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/movies/discover', {
+      const res = await api.get('/movies/discover', {
         params: filters,
       });
       setMovies(res.data.results || []);

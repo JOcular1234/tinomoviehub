@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { WatchlistContext } from '../context/WatchlistContext';
 import { MovieContext } from '../context/MovieContext';
+import api from '../api';
 
 function MovieCard({ movie }) {
   const navigate = useNavigate();
@@ -51,8 +52,8 @@ function MovieCard({ movie }) {
         navigate('/login');
         return;
       }
-      await axios.post(
-        'http://localhost:5000/api/user/favorites',
+      await api.post(
+        '/user/favorites',
         { movieId: movie.id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

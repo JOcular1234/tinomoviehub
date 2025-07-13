@@ -1,6 +1,6 @@
 // src/context/WatchlistContext.jsx
 import { createContext, useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { toast } from 'react-toastify';
 
 export const WatchlistContext = createContext();
@@ -18,7 +18,7 @@ export const WatchlistProvider = ({ children }) => {
         setError('Please log in to view watchlists');
         return;
       }
-      const res = await axios.get('http://localhost:5000/api/user/watchlists', {
+      const res = await api.get('/user/watchlists', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setWatchlists(res.data || []);
@@ -46,8 +46,8 @@ export const WatchlistProvider = ({ children }) => {
         toast.error('Please log in to create a watchlist');
         return false;
       }
-      const res = await axios.post(
-        'http://localhost:5000/api/user/watchlists',
+      const res = await api.post(
+        '/user/watchlists',
         { name },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -67,8 +67,8 @@ export const WatchlistProvider = ({ children }) => {
         toast.error('Please log in to add to watchlist');
         return false;
       }
-      const res = await axios.post(
-        `http://localhost:5000/api/user/watchlists/${watchlistName}`,
+      const res = await api.post(
+        `/user/watchlists/${watchlistName}`,
         { movieId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -88,8 +88,8 @@ export const WatchlistProvider = ({ children }) => {
         toast.error('Please log in to remove from watchlist');
         return false;
       }
-      const res = await axios.delete(
-        `http://localhost:5000/api/user/watchlists/${watchlistName}/${movieId}`,
+      const res = await api.delete(
+        `/user/watchlists/${watchlistName}/${movieId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setWatchlists(res.data);
@@ -108,8 +108,8 @@ export const WatchlistProvider = ({ children }) => {
         toast.error('Please log in to delete watchlist');
         return false;
       }
-      const res = await axios.delete(
-        `http://localhost:5000/api/user/watchlists/${watchlistName}`,
+      const res = await api.delete(
+        `/user/watchlists/${watchlistName}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setWatchlists(res.data);
