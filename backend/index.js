@@ -9,8 +9,17 @@ const userRoutes = require('./routes/users'); // Ensure this path is correct
 
 const app = express();
 
+// CORS configuration for production
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? [process.env.FRONTEND_URL, 'https://tinomoviehub.vercel.app'] // Your actual frontend URL
+    : ['http://localhost:3000', 'http://localhost:5173'], // Development URLs
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Connect to MongoDB
