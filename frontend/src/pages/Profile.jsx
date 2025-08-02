@@ -185,11 +185,7 @@ function Profile() {
           watchlists.map((wl) => (
             <div key={wl.name} className="mb-6">
               <div className="flex justify-between items-center">
-                {/* <h3 className="text-xl font-semibold text-white">{wl.name}</h3> */}
-                <h3
-  className="text-xl font-semibold text-white"
-  dangerouslySetInnerHTML={{ __html: wl.name }}
-/>
+                <h3 className="text-xl font-semibold text-white">{wl.name}</h3>
 
                 <button
                   onClick={() => handleDeleteWatchlist(wl.name)}
