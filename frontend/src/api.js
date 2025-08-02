@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://tinomoviehub.onrender.com/api';
 
 // Debug: Log the API URL being used
-console.log('API Base URL:', API_BASE_URL);
-console.log('Environment variable:', import.meta.env.VITE_API_URL);
+// console.log('API Base URL:', API_BASE_URL);
+// console.log('Environment variable:', import.meta.env.VITE_API_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
