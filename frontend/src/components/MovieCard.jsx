@@ -111,8 +111,7 @@ function MovieCard({ movie }) {
         onClick={() => navigate(`/movie/${movieDetails.id}`)}
       />
       <div className="p-4">
-        {/* <h3 className="text-lg font-semibold text-white truncate">{movieDetails.title || 'Loading...'}</h3> */}
-        <h3 dangerouslySetInnerHTML={{ __html: movieDetails.title }} />
+        <h3 className="text-lg font-semibold text-white truncate">{movieDetails.title || 'Loading...'}</h3>
 
         <p className="text-gray-400">{movieDetails.release_date?.split('-')[0] || 'N/A'}</p>
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
